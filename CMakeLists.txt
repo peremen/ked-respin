@@ -11,22 +11,22 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DAPPDEFAULTSDIR=/usr/local/lib/X11/app-defa
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DAPPDEFAULTSDIR=/usr/local/lib/X11/app-defaults")
 
 list(APPEND KED_SOURCES
-    main.c
-    basic.c
-    Kfont.c
-    container.c
-    base.c
-    menu.c
-    editor.c
-    dialog.c
-    scroll.c
-    scrollbar.c
-    button.c
-    input_dialog.c
-    load.c
-    save.c
-    cut.c
-    print.c
+    main.cpp
+    basic.cpp
+    Kfont.cpp
+    container.cpp
+    base.cpp
+    menu.cpp
+    editor.cpp
+    dialog.cpp
+    scroll.cpp
+    scrollbar.cpp
+    button.cpp
+    input_dialog.cpp
+    load.cpp
+    save.cpp
+    cut.cpp
+    print.cpp
 )
 
 add_executable(ked

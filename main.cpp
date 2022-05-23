@@ -1,6 +1,5 @@
 // Main
 
-#include <std.h>
 #include "button.h"
 #include "menu.h"
 #include "editor.h"
