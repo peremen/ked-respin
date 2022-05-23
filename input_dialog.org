@@ -1,0 +1,79 @@
+// Input Dialog class implementation
+
+#include "input_dialog.h"
+#include "button.h"
+#include "margin.h"
+#include "Xutil.h"
+
+static void open(XEvent* event, void* arg)
+{
+  input_dialog* d = arg;
+  d->call_func();
+  d->unmap();
+}
+
+static void cancel(XEvent* event, void* arg)
+{
+  ((input_dialog*)arg)->unmap();
+}
+
+static void expose(XEvent* event, void* arg)
+{
+  input_dialog* d = arg;
+  XDrawRectangle(d->display(), d->window(), d->gc(), margin, margin,
+		 d->width() - margin * 2,
+		 d->input_box()->height() + imargin * 2);
+  XSetInputFocus(d->display(), d->input_box()->window(),
+		 RevertToParent, CurrentTime);
+}
+
+static void key_press(XEvent* event, void* arg)
+{
+  input_dialog *d = arg;
+  char buf[2];
+  KeySym keysym;
+  if (XLookupString(&event->xkey, buf, 1, &keysym, 0))
+    if (buf[0] == '\r')
+      {
+	d->call_func();
+	d->unmap();
+      }
+}
+
+input_dialog::input_dialog(container* parent) :
+       (parent, ExposureMask, 0, False, 1, True)
+{
+  ob = new button(this, "\201\201\200\215\207\200\214\211\200\201\225\200");
+  ob->add_event(ButtonRelease, open, this);
+  cb = new button(this, "\217\221\200\212\211\200");
+  cb->add_event(ButtonRelease, cancel, this);
+  ib = new editor(this, 20, 1, 0, True);
+  ib->add_event(KeyPress, key_press, this);
+  add_event(Expose, expose, this);
+}
+
+void input_dialog::calc()
+{
+  int button_w = ob->width() > cb->width() ? ob->width() : cb->width();
+  ib->set_xy(margin + imargin, margin + imargin);
+  ob->set(margin, ib->height() + margin * 2 + imargin * 2,
+	  button_w, ob->height());
+  cb->set(ob->width() + margin * 2, ib->height() + margin * 2 + imargin * 2,
+	  button_w, cb->height());
+  int dialog_w = ib->width() + margin * 2 + imargin * 2;
+  int dialog_h = ib->height() + ob->height() + margin * 3 + imargin * 2;
+  set(parent()->width() - dialog_w >> 1,
+      parent()->height() - dialog_h >> 2, dialog_w,
+      dialog_h);
+}
+
+void input_dialog::call_func()
+{
+  (*open_function)(ib->value(), arg);
+}
+
+void input_dialog::set_func(func_type func, editor* e)
+{
+  open_function = func;
+  arg = e;
+}

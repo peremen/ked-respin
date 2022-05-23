@@ -1,0 +1,9 @@
+#
+# shell script for download fonts
+#
+cat Header Munjo | lpr -Pps
+#
+# Too simple?
+#
+# You can change Munjo with Gotic, PCMunjo, MunjoBold.
+#

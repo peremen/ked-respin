@@ -1,0 +1,32 @@
+  Ked is written with C++(GNU). If you have no C++ compiler,
+  install it previously.
+
+  If you have any problem with installing, inform me.
+
+  Here are some information about ked.
+
+  * Screen font
+    
+    Ked loads screen font from directory `/usr/local/fonts'
+    Font file's name is `hangul.sft'. If ked does not find it,
+    ked try to load `hangul.sft' from current directory.
+
+    So, if you can, place `hangul.sft' to `/usr/local/fonts'.
+    If not, you might change directory name in source `Kfont.h'.
+    And recomile ked.
+
+  * Printing
+
+    You can print file like this:
+
+    1. Select `print' from menu.
+    2. Then in current directory, file named `PrintOut' is created.
+    3. Download Korean font.
+
+       % cat Header Munjo | lpr
+
+    4. Print `PrintOut'
+
+       % lpr PrintOut
+
+  * English <--> Korean switching : Ctrl-K or F2

@@ -1,0 +1,68 @@
+%!PS-Adobe-2.0
+%%Title: Hangul downloading fonts header
+%%CreationDate: 1989.4.25
+%%Creator: ELEXI using Fontographer
+%%Modifier: Lee, HyeonKyu
+%%For: Hangul printing in any PostScript printer
+%%Pages: 0
+%% The ascent and descent values ensure 
+%% that Roman characters have the same base line as Hangul
+%%EndComments
+serverdict begin 0 exitserver
+systemdict/currentpacking known{/SavPak currentpacking def true setpacking}if
+userdict/AltRT5 known{{currentfile(   )readstring{(%%%)eq{exit}if}{pop}ifelse}loop}if
+userdict begin/AltRT5 39 dict def AltRT5 begin/NL 0 def/B{bind def}bind def
+/Cache{NL 0 eq{setcachedevice}{6{pop}repeat}ifelse 0 0 moveto}B
+/SetWid{NL 0 eq{0 setcharwidth setgray}{pop setgray}ifelse 0 0 moveto}B
+/ShowInt{/NL NL 1 add store BC2 grestore/NL NL 1 sub store}B
+/charStr(.)def/Strk 0 def/Sstrk{/Strk 1 store}B
+/Cfill{PaintType 0 eq{Strk 0 eq{exec}{gsave exec grestore
+currentgray 0 ne{0 setgray}if stroke}ifelse}{pop stroke}ifelse}B
+/Fill{{fill}Cfill}def/Eofill{{eofill}Cfill}def/Cp{closepath 0 0 moveto}def
+/ShowExt{EFN exch get findfont setfont matrix currentmatrix exch
+InvMtx concat 0 0 moveto charStr 0 3 -1 roll put PaintType 0 ne Strk 0 ne
+or currentgray 0 ne or{charStr false charpath setmatrix Fill}
+{charStr show pop}ifelse grestore}B/stringtype{{UCS}forall}B
+/arraytype/exec load def/packedarraytype/exec load def
+/BuildChar{AltRT5 begin exch begin BC2 end end}B
+/BC2{save exch StrokeWidth setlinewidth/Strk 0 store
+Encoding exch get dup CharDefs exch known not{pop/.notdef}if
+CharDefs exch get newpath dup type exec restore}B 
+/UVec[{rmoveto}{rlineto}{rcurveto}{ShowExt}{]concat}{Cache}{setlinewidth}
+{ShowInt}{setlinecap}{setlinejoin}{gsave}{[}{Fill}{Eofill}{stroke}{SetWid}
+{100 mul add}{100 mul}{100 div}{Cp}{Sstrk}{setgray}]def
+/UCS{dup 200 lt{100 sub}{dup 233 lt{216 sub 100 mul add}
+{233 sub UVec exch get exec}ifelse}ifelse}B
+/CD{/NF exch def{exch dup/FID ne{exch NF 3 1 roll put}  
+{pop pop}ifelse}forall NF}B
+/MN{1 index length/Len exch def dup length Len add string dup 
+Len 4 -1 roll putinterval dup 0 4 -1 roll putinterval}B
+/RC{(|______)anchorsearch {1 index MN cvn/NewN exch def cvn
+findfont dup maxlength dict CD dup/FontName NewN put dup
+/Encoding MacVec put NewN exch definefont pop}{pop}ifelse}B
+/RF{dup FontDirectory exch known{pop}{RC}ifelse}B
+/MacVec 256 array def MacVec 0 /Helvetica findfont
+/Encoding get 0 128 getinterval putinterval MacVec 127 /DEL put
+MacVec 16#27 /quotesingle put  MacVec 16#60 /grave put/NUL/SOH/STX/ETX
+/EOT/ENQ/ACK/BEL/BS/HT/LF/VT/FF/CR/SO/SI/DLE/DC1/DC2/DC3/DC4/NAK/SYN
+/ETB/CAN/EM/SUB/ESC/FS/GS/RS/US MacVec 0 32 getinterval astore pop
+/Adieresis/Aring/Ccedilla/Eacute/Ntilde/Odieresis/Udieresis/aacute
+/agrave/acircumflex/adieresis/atilde/aring/ccedilla/eacute/egrave
+/ecircumflex/edieresis/iacute/igrave/icircumflex/idieresis/ntilde/oacute
+/ograve/ocircumflex/odieresis/otilde/uacute/ugrave/ucircumflex/udieresis
+/dagger/degree/cent/sterling/section/bullet/paragraph/germandbls
+/registersans/copyrightsans/trademarksans/acute/dieresis/notequal/AE/Oslash
+/infinity/plusminus/lessequal/greaterequal/yen/mu/partialdiff/summation
+/product/pi/integral/ordfeminine/ordmasculine/Omega/ae/oslash 
+/questiondown/exclamdown/logicalnot/radical/florin/approxequal/Delta/guillemotleft
+/guillemotright/ellipsis/nbspace/Agrave/Atilde/Otilde/OE/oe
+/endash/emdash/quotedblleft/quotedblright/quoteleft/quoteright/divide/lozenge
+/ydieresis/Ydieresis/fraction/currency/guilsinglleft/guilsinglright/fi/fl
+/daggerdbl/periodcentered/quotesinglbase/quotedblbase
+/perthousand/Acircumflex/Ecircumflex/Aacute
+/Edieresis/Egrave/Iacute/Icircumflex/Idieresis/Igrave/Oacute/Ocircumflex
+/apple/Ograve/Uacute/Ucircumflex/Ugrave/dotlessi/circumflex/tilde
+/macron/breve/dotaccent/ring/cedilla/hungarumlaut/ogonek/caron
+MacVec 128 128 getinterval astore pop end end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%EndProlog

@@ -1,0 +1,61 @@
+^bDAzI Editor (ked) UbWrWRfR
+                                                                     1990. 8. 23
+                                                                     UlW  Xc AjW
+
+1. U|I^cW
+
+   ked [-display name]
+
+   Options
+     -display name : display IzI X|XfW^bDGb. X|XfW^bX| WbD^WzI AjWWsWgDzD environment variable DISPLAY Wz|
+              AbRUWzI W|WrW^bDGb.
+
+2. QsDXb W|RIjA Q|Z [fUf WsQX|AW|Q
+
+   ^bDAzI WjWQsD XfD^lbD - Control K
+   [fUf Wl|DYlA QsDXb X|WsA| - Backspace
+   [fUf WlIzDYlA QsDXb X|WsA| - Delete
+   [fUf Wl|DYlAWzIl - Wl|DYlA ^lbUbI]r
+   [fUf WlIzDYlAWzIl - WlIzDYlA ^lbUbI]r
+   [fUfIzI XsIWz| QcD Wb]WzIl - Home
+   [fUfIzI XsIWz| QcD Gs|Il - End
+
+3. QgDwWg Gc^bD UfIQjW
+
+   (1) QsDUf QgDw
+      (Ab) Uc QsDUf
+           Editor WbDWz| QsDUfWz| DcWrWWzI XfDRsX|WsAl, QsDUfWz| W|IzQWzI unnamed Il ^bDGb.
+           W| QgDwIzI UfD\cA^bA|XfDWg 'RlAlbD' QgDwIzI UfD\cA^bWj QsDUfIzI RlAlbD^bI AfU.
+
+      (Db) AbXjWlA|
+           Disk IlRs\f QsDUfWzI W|IAWfGzIWj WlDGb.
+           W| QgDwIzI UfD\cA^bQjD QsDUfWz| W|IzQWzI QsIWfRlDzD DgQlAb AzIjX|DGb. WjA|Uf AbXjWlI QsDUfIzI UfD\cA^bDzD RbWRfRWzD
+           (a) [|RlGzIzI W|WrW^bWj QsDUfWz| W|IzQWzI W|RIjA^bD ^s, Return WzI DsIzDGb.
+           (b) AbXjWlI QsDUfIzI click ^bD^s 'AbXjWlA|' Rf\zDWzI DsIzDGb.
+           (c) AbXjWlI QsDUfWs|WgUf double click ^bDGb.
+           QbDWdA UfD\cA^bD QsDUfAb directory W|I AjWWsWgDzD Az directory Wz| DcWrWW| ]rU|Gl|Al GbU| QsDUfIzI UfD\cA^b
+           A|IzI A|GbI|DGb.
+
+      (Gb) RlAlbD
+           QsDUfIzI Disk Wg RlAlbD^bDGb.
+           QsDUfWz| W|IzQWzI QsIWfRlDzD DgQlAb AzIjXjVWzI Hc, ^jDXc QsDUfWz| W|IzQW| QbXWzQjD RlAlbD Rf\zDWzI DsIzDGb.
+           W|IzQWzI RbBsAl U|]WzD AjWWsWgDzD [|RlGzIzI W|WrW^bWj QsDUfWz| W|IzQWzI RbBsD^s Return WzI DsIzDGb.
+
+      (Ib) Bz\
+           ^bDAzI Editor IzI QbZ|DGb.
+           W| QgDwIzI UfD\cA^bA| XfDWg 'RlAlbD' QgDwIzI UfD\cA^cUf QsDUfIzI RlAlbD^bGlIlA ^bDGb.
+
+   (2) ]jDX|R QgDw
+       (Ab) XbIzA|
+           W|QgDwIzI UfD\cA^bA| XfDWg QfDXf QbWsUzIzI W|WrW^bWj QsDUfWgUf XbIzIRsRsDWzI UfD\cA^bDGb. QbWsUzIzI W|WrW^bWj
+           UfD\cA^bDzD RbWRfRWzD QbWsUz Rf\zDWzI DsIzDZc QbWsUzIzI WsQX|AW|QjD Gl|DGb. UfD\cAGl|D RsRsDWzD RbDXfDGl|Wf ]rU|Gl|DGb.
+           W| Hc W| QgDwIzI UfD\cA^bQjD RbDXfDGl|D RsRsDW| XbIIbXjUf WfRUWfX|DGb. W| XbIIbX|D RsRsDWzI GbU| BfDcAl U|]WzI
+           HcDzD 'Rs\W|A|' QgDwIzI UfD\cA^bDGb.
+
+       (Db) RlAUb
+           'XbIzA|' QgDwWlb Ab\WzDb, U|IXgIl XbIzX| WbD^Al UfD\cAGl|D RsRsDWzI DbQAjGsD Zc GbIzD AlUWg RlAUb^c GsWfVGbAb
+           DbXsWWg 'Rs\W|A|' QgDwIzI W|WrW^bWj BfDcI Us W|VAg ^bDGb.
+
+       (Gb) Rs\W|A|
+           'XbIzA|' Db 'RlAUb' QgDwIl RlAlbD^c GsWfVGfD QsDUfWz| W|IRsRsDWzI ^jDXc [fUf Ws|Z|Wg UbRW|R^c Df^DzDGb.
+

@@ -1,0 +1,13 @@
+%!
+/Times-Roman findfont 20 scalefont setfont
+/RM 600 def
+
+/CS {  % (string) CS ==> center show
+	dup stringwidth pop RM exch sub 2 div 0 rmoveto show
+	} def
+
+0 200 moveto
+(This is center aligned text.) CS
+
+showpage
+
