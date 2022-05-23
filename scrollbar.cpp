@@ -1,8 +1,8 @@
 // Scroll Bar class implementation
 
-#include <std.h>
 #include <signal.h>
 #include <time.h>
+#include <sys/time.h>
 #include "scrollbar.h"
 #include "margin.h"
 #include "up"
@@ -27,7 +27,7 @@ void set_timer(int msec, void (*func)())
   value.it_value.tv_sec = 0;
   value.it_value.tv_usec = msec * 1000;
   setitimer(ITIMER_REAL, &value, 0);
-  signal(SIGALRM, func);
+  signal(SIGALRM, (__sighandler_t)func);
 }
 
 static void timer_caller()
@@ -36,7 +36,7 @@ static void timer_caller()
 }
 
 scrollbar::scrollbar(scroll* scrll) :
-       (scrll->parent(), ExposureMask|ButtonPressMask|ButtonReleaseMask|
+       basic(scrll->parent(), ExposureMask|ButtonPressMask|ButtonReleaseMask|
 	ButtonMotionMask)
 {
   s = scrll;
@@ -162,7 +162,7 @@ void scrollbar::button_release(XEvent* event)
       s->set_start(sp);
       set_drag(0);
     }
-  set_timer(0, SIG_IGN);
+  set_timer(0, (void (*)())SIG_IGN);
   if (continue_job == Up)
     put_bitmap(up_fill_bits, border_text_m, border_text_m,
 	       up_fill_width, up_fill_height, True);

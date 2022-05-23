@@ -1,13 +1,13 @@
 // Input Dialog class implementation
 
+#include <X11/Xutil.h>
 #include "input_dialog.h"
 #include "button.h"
 #include "margin.h"
-#include <X11/Xutil.h>
 
 static void open(XEvent* event, void* arg)
 {
-  input_dialog* d = arg;
+  input_dialog* d = (input_dialog *)arg;
   d->call_func();
 }
 
@@ -18,7 +18,7 @@ static void cancel(XEvent* event, void* arg)
 
 static void expose(XEvent* event, void* arg)
 {
-  input_dialog* d = arg;
+  input_dialog* d = (input_dialog *)arg;
   XDrawRectangle(d->display(), d->window(), d->gc(),
 		 2, 2, d->width() - 5, d->height() - 5);
   XDrawRectangle(d->display(), d->window(), d->gc(),
@@ -34,7 +34,7 @@ static void expose(XEvent* event, void* arg)
 
 static void key_press(XEvent* event, void* arg)
 {
-  input_dialog *d = arg;
+  input_dialog *d = (input_dialog *)arg;
   char buf[2];
   KeySym keysym;
   if (XLookupString(&event->xkey, buf, 1, &keysym, 0))
@@ -43,7 +43,7 @@ static void key_press(XEvent* event, void* arg)
 }
 
 input_dialog::input_dialog(container* parent) :
-       (parent, ExposureMask, 0, False, 1, True)
+       container(parent, ExposureMask, 0, False, 1, True)
 {
   ob = new button(this, "ˆ‰€Š„");
   ob->add_event(ButtonRelease, open, this);

@@ -1,6 +1,7 @@
 // Load
 
-#include <std.h>
+#include <string.h>
+#include <stdio.h>
 #include "dialog.h"
 #include "ked.h"
 
@@ -14,7 +15,7 @@ static int state = Ascii;
 
 void new_file(void* arg)
 {
-  editor* e = arg;
+  editor* e = (editor *)arg;
   e->delete_all();
   e->append("");
   e->list_all();
@@ -23,7 +24,7 @@ void new_file(void* arg)
 
 void load(void* arg)
 {
-  dialog* d = arg;
+  dialog* d = (dialog *)arg;
   d->input_box()->delete_all();
   d->input_box()->append(file_name);
   d->map();

@@ -1,6 +1,7 @@
 // Save file
 
-#include <std.h>
+#include <stdio.h>
+#include <string.h>
 #include "ked.h"
 #include "input_dialog.h"
 #include "aline.h"
@@ -12,7 +13,7 @@ const int Ctrl_O = 'O' - '@';
 
 void save(void* arg)
 {
-  input_dialog* d = arg;
+  input_dialog* d = (input_dialog *)arg;
   d->input_box()->delete_all();
   d->input_box()->append(file_name);
   d->map();

@@ -2,7 +2,7 @@
 
 #include "button.h"
 
-button::button(char* l) : (0, ExposureMask|ButtonPressMask|ButtonReleaseMask|
+button::button(char* l) : basic(0, ExposureMask|ButtonPressMask|ButtonReleaseMask|
 			   EnterWindowMask|LeaveWindowMask, 0, True, 1)
 {
   label = l;
@@ -10,7 +10,7 @@ button::button(char* l) : (0, ExposureMask|ButtonPressMask|ButtonReleaseMask|
 }
 
 button::button(container* parent, char* l) :
-       (parent, ExposureMask|ButtonPressMask|ButtonReleaseMask|EnterWindowMask|
+       basic(parent, ExposureMask|ButtonPressMask|ButtonReleaseMask|EnterWindowMask|
 	LeaveWindowMask, 0, True, 0)
 {
   label = l;

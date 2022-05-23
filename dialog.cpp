@@ -1,16 +1,16 @@
 // Dialog class implementation
 
-#include <std.h>
+#include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <X11/Xutil.h>
 #include "dialog.h"
 #include "button.h"
 #include "margin.h"
-#include <X11/Xutil.h>
 
 static void open(XEvent* event, void* arg)
 {
-  dialog* d = arg;
+  dialog* d = (dialog *)arg;
   d->call_open_func();
 }
 
@@ -21,7 +21,7 @@ static void cancel(XEvent* event, void* arg)
 
 static void expose(XEvent* event, void* arg)
 {
-  dialog* d = arg;
+  dialog* d = (dialog *)arg;
   XDrawRectangle(d->display(), d->window(), d->gc(),
 		 2, 2, d->width() - 5, d->height() - 5);
   XDrawRectangle(d->display(), d->window(), d->gc(),
@@ -35,7 +35,7 @@ static void expose(XEvent* event, void* arg)
 
 static void key_press(XEvent* event, void* arg)
 {
-  dialog *d = arg;
+  dialog *d = (dialog *)arg;
   char buf[2];
   KeySym keysym;
   if (XLookupString(&event->xkey, buf, 1, &keysym, 0))
@@ -45,7 +45,7 @@ static void key_press(XEvent* event, void* arg)
 
 static void button_release(XEvent* event, void* arg)
 {
-  dialog* d = arg;
+  dialog* d = (dialog *)arg;
   d->input_box()->delete_all();
   d->input_box()->append(d->select_box()->selection()->buf);
   d->input_box()->list_all();
@@ -53,13 +53,13 @@ static void button_release(XEvent* event, void* arg)
 
 static void double_click(XEvent* event, void* arg)
 {
-  dialog* d = arg;
+  dialog* d = (dialog *)arg;
   d->call_open_func();
 }
 
 static void map_event(XEvent* event, void* arg)
 {
-  dialog* d = arg;
+  dialog* d = (dialog *)arg;
   d->select_box()->list_files();
   XSetInputFocus(d->display(), d->input_box()->window(),
 		 RevertToParent, CurrentTime);
@@ -67,7 +67,7 @@ static void map_event(XEvent* event, void* arg)
 }
 
 dialog::dialog(container* parent) :
-       (parent, ExposureMask|StructureNotifyMask, 0, False, 1, True)
+       container(parent, ExposureMask|StructureNotifyMask, 0, False, 1, True)
 {
   ob = new button(this, "\201\201\200\215\207\200\214\211\200\201\225\200");
   ob->add_event(ButtonRelease, open, this);

@@ -1,24 +1,25 @@
 // Scroll class implementation
 
-#include <std.h>
+#include <stdio.h>
+#include <string.h>
 #include "scroll.h"
 #include "margin.h"
 
 static void expose(XEvent* event, void* arg)
 {
-  scroll* s = arg;
+  scroll* s = (scroll *)arg;
   s->list();
 }
 
 static void button_press(XEvent* event, void* arg)
 {
-  scroll* s = arg;
+  scroll* s = (scroll *)arg;
   int i = event->xbutton.y / s->char_height();
   s->select(i);
 }
 
 scroll::scroll(container* parent, int w, int h) :
-       (parent, ExposureMask|ButtonPressMask|ButtonReleaseMask)
+       basic(parent, ExposureMask|ButtonPressMask|ButtonReleaseMask)
 {
   set_wh(w * kcwidth(), h * char_height());
   vs = h;

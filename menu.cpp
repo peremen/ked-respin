@@ -4,7 +4,7 @@
 #include "basic.h"
 
 menu::menu(container* parent, menu_info* ami) :
-       (parent, ExposureMask|ButtonPressMask|ButtonReleaseMask|
+       basic(parent, ExposureMask|ButtonPressMask|ButtonReleaseMask|
 	ButtonMotionMask)
 {
   mi = ami;
@@ -143,7 +143,7 @@ void menu::reverse(menu_info* i)
 }
     
 submenu::submenu(container* parent, submenu_info* asmi, int x, int y) :
-       (parent, ExposureMask, 0, False, 0, True)
+       basic(parent, ExposureMask, 0, False, 0, True)
 {
   smi = asmi;
   set(x, y, submenu_width(asmi), submenu_height(asmi));

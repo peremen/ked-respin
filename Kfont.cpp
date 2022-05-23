@@ -2,7 +2,9 @@
 //
 //  written by Song Jaekyung
 
-#include <std.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "Kfont.h"
 #include "macro.h"
 #include "basic.h"

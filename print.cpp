@@ -1,6 +1,8 @@
 // Print
 
-#include <std.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "editor.h"
 
 void PrintLine(char*);
@@ -12,33 +14,32 @@ int FindF(int, int, int);
 int FindM(int, int, int);
 int FindL(int, int, int);
 
-const char* prolog = "\
-%! Ked output file
-%% prolog
-/LM 50 def\n\
-/RM 550 def\n\
-/TM 780 def\n\
-/BM 40 def\n\
-/FS 11 def\n\
-/VS { FS 2 add } def\n\
-/E { /Courier findfont FS scalefont setfont } def\n\
-/K1 { /MunjoHan1 findfont FS scalefont setfont } def\n\
-/K2 { /MunjoHan2 findfont FS scalefont setfont } def\n\
-/NP { /VP TM def LM VP moveto } def\n\
-/NL { /VP VP VS sub def LM VP moveto } def\n\
-/S { show } def\n\
-/SN { show NL VP BM sub 2 le { showpage NP } if } def\n\
-/SP { showpage } def\n\
-%% end of prolog\n\
-NP\n\
-";
+const char* prolog = 
+"%! Ked output file"
+"%% prolog"
+"/LM 50 def\n"
+"/RM 550 def\n"
+"/TM 780 def\n"
+"/BM 40 def\n"
+"/FS 11 def\n"
+"/VS { FS 2 add } def\n"
+"/E { /Courier findfont FS scalefont setfont } def\n"
+"/K1 { /MunjoHan1 findfont FS scalefont setfont } def\n"
+"/K2 { /MunjoHan2 findfont FS scalefont setfont } def\n"
+"/NP { /VP TM def LM VP moveto } def\n"
+"/NL { /VP VP VS sub def LM VP moveto } def\n"
+"/S { show } def\n"
+"/SN { show NL VP BM sub 2 le { showpage NP } if } def\n"
+"/SP { showpage } def\n"
+"%% end of prolog\n"
+"NP\n";
 static int cs = 0;
 static int col = 0;
 static FILE* fp;
 
 void print(void* arg)
 {
-  editor* e = arg;
+  editor* e = (editor *)arg;
   char buf[maxbuf];
   fp = fopen("PrintOut", "w");
   if (fp == NULL)
@@ -138,8 +139,9 @@ void ChangeFont(int s)
     }
 }
 	
-void PrintA(int a, int check = True)
+void PrintA(int a, int check)
 {
+    int n;
   if (check)
     ChangeFont('a');
   if (col == 0)
@@ -147,7 +149,7 @@ void PrintA(int a, int check = True)
   switch (a)
     {
     case '\t':
-      int n = col / 8 * 8 + 8 - col;
+      n = col / 8 * 8 + 8 - col;
       while (n-- > 0)
 	{
 	  fputc(' ', fp);

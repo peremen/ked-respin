@@ -1,7 +1,11 @@
 // Basic class implementation
 
-#include <std.h>
 #include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <stdio.h>
+#include <unistd.h>
 #include "basic.h"
 #include "macro.h"
 #include "container.h"
@@ -29,7 +33,7 @@ static XrmOptionDescRec cmd_opt[] = {
  * This routine extracts the program name in case it was specified
  * with a directory name as well.
  */
-static char *basename(char *fname)
+static char *priv_basename(char *fname)
 {
     register char *pt, *out;
 
@@ -99,7 +103,7 @@ static void mergeResourceDBs(Display *disp, char *classname)
      * First, get the default resources from the application defaults
      * file.
      */
-    sprintf(filename, "%s/%s", APPDEFAULTSDIR, classname);
+    sprintf(filename, "%s/%s", "/usr/local/lib/X11/app-defaults", classname);
     appDB = XrmGetFileDatabase(filename);
     (void) XrmMergeDatabases(appDB, &rDB);
 
@@ -232,9 +236,9 @@ static int GetColor(char *progname, char *classname,
     return(pix);
 }
 
-basic::basic(container* parent, long m, char *display_name = 0,
-	     Bool map = True, int border = 1, Bool popupflag = False,
-             int *ac = 0, char **av = 0)
+basic::basic(container* parent, long m, char *display_name,
+	     Bool map, int border, Bool popupflag,
+             int *ac, char **av)
 {
     char *progname, *classname, *dispname = 0;
     char str_name[256], str_class[256], str_type[50];
@@ -249,7 +253,7 @@ basic::basic(container* parent, long m, char *display_name = 0,
     p = parent;
     if (parent == 0)
       {
-          progname = basename(av[0]);
+          progname = priv_basename(av[0]);
           classname = capprogname(progname);
           XrmInitialize();
           XrmParseCommand(&cmdDB, cmd_opt, num_cmd_opt,
@@ -395,7 +399,7 @@ Bool basic::handle(XEvent* event)
 }
 
 void basic::put_bitmap(char* bits, int x, int y, int w, int h,
-		       Bool rev = False)
+		       Bool rev)
 {
   XImage ximage;
   ximage.height = h;

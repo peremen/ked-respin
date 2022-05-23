@@ -2,10 +2,10 @@
 
 #include "container.h"
 
-container::container(container* parent, long mask, char* name = 0,
-		     Bool map = True, int bw = 1, Bool pop = False,
-                     int *ac = 0, char **av = 0) :
-       (parent, mask, name, map, bw, pop, ac, av)
+container::container(container* _parent, long _mask, char* _name,
+		     Bool _map, int _bw, Bool _pop,
+                     int *_ac, char **_av) :
+    basic(_parent, _mask, _name, _map, _bw, _pop, _ac, _av)
 {
   children = 0;
 }
@@ -14,7 +14,8 @@ void container::calc()
 {
   int max_w = 0;
   int max_h = 0;
-  for (basic_list* i = children; i != 0; i = i->next)
+  basic_list *i;
+  for (i = children; i != 0; i = i->next)
     if (!i->b->popup() && i->b->width() + i->b->border_width() * 2 > max_w)
       max_w = i->b->width() + i->b->border_width() * 2;
   for (i = children; i != 0; i = i->next)
@@ -37,13 +38,14 @@ void container::create()
 void container::add_child(basic* child)
 {
   basic_list* b = new basic_list;
+  basic_list *i;
   b->b = child;
   b->next = 0;
   if (children == 0)
     children = b;
   else
     {
-      for (basic_list* i = children; i->next != 0; i = i->next)
+      for (i = children; i->next != 0; i = i->next)
 	;
       i->next = b;
     }

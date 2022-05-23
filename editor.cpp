@@ -1,13 +1,13 @@
 // Editor class implementation
 
-#include <std.h>
+#include <string.h>
 #include <X11/keysym.h>
-#include "editor.h"
 #include <X11/Xutil.h>
+#include "editor.h"
 
-editor::editor(container* parent, int w, int h, int bw = 1,
-	       Bool single_line_f = False) :
-       (parent, ExposureMask|KeyPressMask|ButtonPressMask|ButtonMotionMask|
+editor::editor(container* parent, int w, int h, int bw,
+	       Bool single_line_f) :
+       basic(parent, ExposureMask|KeyPressMask|ButtonPressMask|ButtonMotionMask|
 	FocusChangeMask, 0, True, bw)
 {
   set_wh(w * kcwidth(), h * char_height());
@@ -770,7 +770,7 @@ int editor::comvow(int v, int c)
   return 0;
 }
 
-void editor::forward(Bool scroll = True)
+void editor::forward(Bool scroll)
 {
   if (*cp == '\t')
     {
@@ -936,7 +936,7 @@ void editor::delete_backward_char()
     }
 }
 
-void editor::insert_char(int w, Bool scroll = True, int tab = False)
+void editor::insert_char(int w, Bool scroll, int tab)
 {
   int xw;
   if (tab)

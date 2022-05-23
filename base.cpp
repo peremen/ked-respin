@@ -1,10 +1,12 @@
 // Base class implementation
 
-#include <std.h>
-#include "base.h"
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <X11/Xutil.h>
+#include "base.h"
 
-base::base(int *argc, char** argv) : (0, 0, 0, True, 1, False, argc, argv)
+base::base(int *argc, char** argv) : container(0, 0, 0, True, 1, False, argc, argv)
 {
   sargc = *argc;
   sargv = argv;
@@ -14,7 +16,7 @@ base::base(int *argc, char** argv) : (0, 0, 0, True, 1, False, argc, argv)
  * This routine extracts the program name in case it was specified
  * with a directory name as well.
  */
-static char *basename(char *fname)
+static char *priv_basename(char *fname)
 {
     char *pt = rindex(fname, '/');
     char *out;
@@ -34,7 +36,7 @@ void base::create()
   XSizeHints sizehints;
   XWMHints wmhints;
   XClassHint classhints;
-  char *pname = basename(sargv[0]);
+  char *pname = priv_basename(sargv[0]);
   XTextProperty window_name, icon_name;
 
   container::create();
