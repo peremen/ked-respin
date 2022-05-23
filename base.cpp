@@ -2,7 +2,7 @@
 
 #include <std.h>
 #include "base.h"
-#include "Xutil.h"
+#include <X11/Xutil.h>
 
 base::base(int *argc, char** argv) : (0, 0, 0, True, 1, False, argc, argv)
 {

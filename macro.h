@@ -5,7 +5,7 @@
 #ifndef _macro_
 #define _macro_
 
-#include "Xlib.h"
+#include <X11/Xlib.h>
 
 #define	Scr	(DefaultScreen(display()))
 #define	Root	(DefaultRootWindow(display()))

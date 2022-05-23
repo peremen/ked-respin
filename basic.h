@@ -3,7 +3,7 @@
 #ifndef _basic_
 #define _basic_
 
-#include "Xlib.h"
+#include <X11/Xlib.h>
 #include <X11/Xresource.h>
 #include "Kfont.h"
 

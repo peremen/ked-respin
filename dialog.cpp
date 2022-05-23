@@ -6,7 +6,7 @@
 #include "dialog.h"
 #include "button.h"
 #include "margin.h"
-#include "Xutil.h"
+#include <X11/Xutil.h>
 
 static void open(XEvent* event, void* arg)
 {

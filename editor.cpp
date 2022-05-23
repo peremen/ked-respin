@@ -3,7 +3,7 @@
 #include <std.h>
 #include <X11/keysym.h>
 #include "editor.h"
-#include "Xutil.h"
+#include <X11/Xutil.h>
 
 editor::editor(container* parent, int w, int h, int bw = 1,
 	       Bool single_line_f = False) :

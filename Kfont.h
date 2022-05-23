@@ -5,7 +5,7 @@
 #ifndef _Kfont_
 #define _Kfont_
 
-#include "Xlib.h"
+#include <X11/Xlib.h>
 
 class basic;
 
