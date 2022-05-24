@@ -6,18 +6,18 @@
 
 void cut(void* arg)
 {
-  editor* e = (editor *)arg;
-  e->cut();
+    editor* e = (editor *)arg;
+    e->cut();
 }
 
 void copy(void* arg)
 {
-  editor* e = (editor *)arg;
-  e->copy();
+    editor* e = (editor *)arg;
+    e->copy();
 }
 
 void paste(void* arg)
 {
-  editor* e = (editor *)arg;
-  e->paste();
+    editor* e = (editor *)arg;
+    e->paste();
 }

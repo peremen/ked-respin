@@ -7,12 +7,12 @@
 
 class base : public container
 {
-  int sargc;
-  char** sargv;
-//  char* display_name(int, char**);
+    int sargc;
+    char** sargv;
+    //  char* display_name(int, char**);
 public:
-  base(int *, char**);
-  void create();
+    base(int *, char**);
+    void create();
 };
 
 #endif // _base_

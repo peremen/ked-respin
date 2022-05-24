@@ -7,17 +7,17 @@
 
 class scroll_area : public basic
 {
-  aline* first;
-  aline* top;
-  aline* end;
-  int h_margin;
-  int v_margin;
+    aline* first;
+    aline* top;
+    aline* end;
+    int h_margin;
+    int v_margin;
 public:
-  scroll_area(container*, int, int, int = 3, int = 0);
-  void up(int);
-  void down(int);
-  void left(int);
-  void right(int);
-  void append(char*);
-  void delete_all();
+    scroll_area(container*, int, int, int = 3, int = 0);
+    void up(int);
+    void down(int);
+    void left(int);
+    void right(int);
+    void append(char*);
+    void delete_all();
 }

@@ -38,7 +38,7 @@ static char *priv_basename(char *fname)
     register char *pt, *out;
 
     if (fname == NULL)
-      return(NULL);
+        return(NULL);
 
     pt = rindex(fname, '/');
     out = fname;
@@ -60,7 +60,7 @@ static char *capprogname(char *pname)
     register char *npname, *ptr;
 
     if (pname == NULL)
-      return(NULL);
+        return(NULL);
 
     npname = (char *)strcpy((char *)malloc(strlen(pname)),pname);
     ptr = npname + 1;
@@ -103,7 +103,7 @@ static void mergeResourceDBs(Display *disp, char *classname)
      * First, get the default resources from the application defaults
      * file.
      */
-    sprintf(filename, "%s/%s", "/usr/local/lib/X11/app-defaults", classname);
+    sprintf(filename, "%s/%s", "/etc/X11/app-defaults", classname);
     appDB = XrmGetFileDatabase(filename);
     (void) XrmMergeDatabases(appDB, &rDB);
 
@@ -111,7 +111,7 @@ static void mergeResourceDBs(Display *disp, char *classname)
      * Next, get the resources stored in the server already.
      */
     if (XResourceManagerString(disp) != NULL)
-      serverDB = XrmGetStringDatabase(XResourceManagerString(disp));
+        serverDB = XrmGetStringDatabase(XResourceManagerString(disp));
     else {
         /*
          * If there was no resource string in the server, then look for
@@ -152,7 +152,7 @@ static void mergeResourceDBs(Display *disp, char *classname)
  * wanted.
  */
 static int DoReverseVideo(char *progname, char *classname,
-                          char *res_name, char *res_class)
+        char *res_name, char *res_class)
 {
     char str_type[50], str_name[128], str_class[128];
     XrmValue value;
@@ -161,9 +161,9 @@ static int DoReverseVideo(char *progname, char *classname,
     sprintf(str_name, "%s.%s", progname, res_name);
     sprintf(str_class, "%s.%s", classname, res_class);
     if (XrmGetResource(rDB, (const char *)str_name, (const char *) str_class,
-                       (char **)&str_type, &value) == True) {
+                (char **)&str_type, &value) == True) {
         if (strncmp((char *)value.addr, "on", value.size) == 0)
-          flag = 1;
+            flag = 1;
     }
 
     return(flag);
@@ -174,34 +174,34 @@ static int DoReverseVideo(char *progname, char *classname,
  * work too well on instances of the editor class.
  */
 /*
-static int GetBorderWidth(char *progname, char *classname,
-                          char *res_name, char *res_class, int default_width)
-{
-    char str_type[50], str_name[128], str_class[128], tmp_str[128];
-    XrmValue value;
-    int bw = default_width;
+   static int GetBorderWidth(char *progname, char *classname,
+   char *res_name, char *res_class, int default_width)
+   {
+   char str_type[50], str_name[128], str_class[128], tmp_str[128];
+   XrmValue value;
+   int bw = default_width;
 
-    sprintf(str_name, "%s.%s", progname, res_name);
-    sprintf(str_class, "%s.%s", classname, res_class);
-    if (XrmGetResource(rDB, (const char *)str_name, (const char *)str_class,
-                       (char **)&str_type, &value) == True) {
-        (void)strncpy(tmp_str, (char *)value.addr, value.size);
-        tmp_str[value.size] = '\0';
-        if (value.size != 0)
-          bw = atoi(tmp_str);
-    }
+   sprintf(str_name, "%s.%s", progname, res_name);
+   sprintf(str_class, "%s.%s", classname, res_class);
+   if (XrmGetResource(rDB, (const char *)str_name, (const char *)str_class,
+   (char **)&str_type, &value) == True) {
+   (void)strncpy(tmp_str, (char *)value.addr, value.size);
+   tmp_str[value.size] = '\0';
+   if (value.size != 0)
+   bw = atoi(tmp_str);
+   }
 
-    return(bw);
-}
-*/
+   return(bw);
+   }
+   */
 
 /*
  * This routine gets specified colors from the resource database.
  */
 static int GetColor(char *progname, char *classname,
-                    char *res_name, char *res_class, char *msg,
-                    Display *disp, Visual *visual, Colormap colormap,
-                    int default_color)
+        char *res_name, char *res_class, char *msg,
+        Display *disp, Visual *visual, Colormap colormap,
+        int default_color)
 {
     char str_type[50], str_name[128], str_class[128], tmp_str[128];
     XrmValue value;
@@ -211,7 +211,7 @@ static int GetColor(char *progname, char *classname,
     sprintf(str_name, "%s.%s", progname, res_name);
     sprintf(str_class, "%s.%s", classname, res_class);
     if (XrmGetResource(rDB, (const char *)str_name, (const char *)str_class,
-                       (char **)&str_type, &value) == True) {
+                (char **)&str_type, &value) == True) {
         (void)strncpy(tmp_str, (char *)value.addr, value.size);
         tmp_str[value.size] = '\0';
         if (XParseColor(disp, colormap, tmp_str, &color) == 0) {
@@ -220,7 +220,7 @@ static int GetColor(char *progname, char *classname,
             pix = default_color;
         } else {
             if (visual->c_class == StaticGray || visual->c_class == GrayScale)
-              pix = default_color;
+                pix = default_color;
             else if (XAllocColor(disp, colormap, &color) == 0) {
                 fprintf(stderr, "%s: couldn't allocate %s color\n",
                         progname, msg);
@@ -237,11 +237,11 @@ static int GetColor(char *progname, char *classname,
 }
 
 basic::basic(container* parent, long m, char *display_name,
-	     Bool map, int border, Bool popupflag,
-             int *ac, char **av)
+        Bool map, int border, Bool popupflag,
+        int *ac, char **av)
 {
     char *progname, *classname, *dispname = 0;
-    char str_name[256], str_class[256], str_type[50];
+    char str_name[256] = {0, }, str_class[256] = {0, }, str_type[50];
     int tmp;
     int screen_num;
     Visual *visual;
@@ -252,111 +252,113 @@ basic::basic(container* parent, long m, char *display_name,
 
     p = parent;
     if (parent == 0)
-      {
-          progname = priv_basename(av[0]);
-          classname = capprogname(progname);
-          XrmInitialize();
-          XrmParseCommand(&cmdDB, cmd_opt, num_cmd_opt,
-                          progname, ac, av);
-          sprintf(str_name, "%s.display", progname);
-          sprintf(str_class, "%s.Display", classname);
-          if (XrmGetResource(cmdDB, (const char *)str_name,
-                             (const char *)str_class, (char **)&str_type,
-                             &value) == True) {
-              dispname = (char *)malloc(value.size + 1);
-              (void)strcpy(dispname, (char *)value.addr);
-          }
-
-          d = XOpenDisplay(dispname);
-          if (d == 0)
-            {
-                fprintf(stderr, "%s: Can't open display '%s'\n", progname,
-                        dispname);
-                exit(1);
-            }
-          screen_num = DefaultScreen(d);
-          visual = DefaultVisual(d, screen_num);
-          colormap = DefaultColormap(d, screen_num);
-          mergeResourceDBs(d, classname);
-          (void) XrmMergeDatabases(cmdDB, &rDB);
-
-          /*
-           * Fill in the basic fields with info.
+    {
+        progname = priv_basename(av[0]);
+        classname = capprogname(progname);
+        XrmInitialize();
+        XrmParseCommand(&cmdDB, cmd_opt, num_cmd_opt,
+                progname, ac, av);
+        sprintf(str_name, "%s.display", progname);
+        sprintf(str_class, "%s.Display", classname);
+        /*
+           if (XrmGetResource(cmdDB, (const char *)str_name,
+           (const char *)str_class, (char **)&str_type,
+           &value) == True) {
+           dispname = (char *)malloc(value.size + 1);
+           (void)strcpy(dispname, (char *)value.addr);
+           }
            */
-          fg = GetColor(progname, classname,
-                        "foreground", "Foreground",
-                        "foreground", d, visual,
-                        colormap, Black);
-          bg = GetColor(progname, classname,
-                        "background", "Background",
-                        "background", d, visual,
-                        colormap, White);
-          bc = GetColor(progname, classname,
-                        "borderColor", "BorderColor",
-                        "border", d, visual,
-                        colormap, Black);
-          /*
-           * Don't worry about border width at the moment, because
-           * it doesn't come out right on instances of the editor
-           * class.
-           */
-/*          bw = GetBorderWidth(progname, classname,
-                              "borderWidth", "BorderWidth", border); */
-          reverse = DoReverseVideo(progname, classname,
-                                   "reverseVideo", "ReverseVideo");
-          values.foreground = fg;
-          values.background = bg;
 
-          if (values.foreground == values.background) {
-              values.foreground = Black;
-              values.background = White;
-          }
+        d = XOpenDisplay(dispname);
+        if (d == 0)
+        {
+            fprintf(stderr, "%s: Can't open display '%s'\n", progname,
+                    dispname);
+            exit(1);
+        }
+        screen_num = DefaultScreen(d);
+        visual = DefaultVisual(d, screen_num);
+        colormap = DefaultColormap(d, screen_num);
+        mergeResourceDBs(d, classname);
+        //(void) XrmMergeDatabases(cmdDB, &rDB);
 
-          if (reverse == 1)
-            {
-                tmp = bg;
-                values.foreground = bg;
-                values.background = fg;
-                bg = fg;
-                fg = tmp;
-                /*
-                 * If the border color is the same as the background color,
-                 * change it to be the forground color so we can see the
-                 * borders of the windows.
-                 */
-                if (bc == bg)
-                  bc = fg;
-            }
+        /*
+         * Fill in the basic fields with info.
+         */
+        fg = GetColor(progname, classname,
+                "foreground", "Foreground",
+                "foreground", d, visual,
+                colormap, Black);
+        bg = GetColor(progname, classname,
+                "background", "Background",
+                "background", d, visual,
+                colormap, White);
+        bc = GetColor(progname, classname,
+                "borderColor", "BorderColor",
+                "border", d, visual,
+                colormap, Black);
+        /*
+         * Don't worry about border width at the moment, because
+         * it doesn't come out right on instances of the editor
+         * class.
+         */
+        /*          bw = GetBorderWidth(progname, classname,
+                    "borderWidth", "BorderWidth", border); */
+        reverse = DoReverseVideo(progname, classname,
+                "reverseVideo", "ReverseVideo");
+        values.foreground = fg;
+        values.background = bg;
 
-          _gc = XCreateGC(d, Root, GCForeground|GCBackground, &values);
+        if (values.foreground == values.background) {
+            values.foreground = Black;
+            values.background = White;
+        }
 
-          /*
-           * Only switch the foreground and background if reverse video
-           * is wanted.
-           */
-          if (reverse == 1) {
-              values.foreground = bg;
-              values.background = fg;
-          }
-          values.function = GXxor;
-          _igc = XCreateGC(display(), Root,
-                           GCFunction|GCForeground|GCBackground,
-                           &values);
-          _kf = new Kfont;
-          _kf->init(this);
-      }
+        if (reverse == 1)
+        {
+            tmp = bg;
+            values.foreground = bg;
+            values.background = fg;
+            bg = fg;
+            fg = tmp;
+            /*
+             * If the border color is the same as the background color,
+             * change it to be the forground color so we can see the
+             * borders of the windows.
+             */
+            if (bc == bg)
+                bc = fg;
+        }
+
+        _gc = XCreateGC(d, Root, GCForeground|GCBackground, &values);
+
+        /*
+         * Only switch the foreground and background if reverse video
+         * is wanted.
+         */
+        if (reverse == 1) {
+            values.foreground = bg;
+            values.background = fg;
+        }
+        values.function = GXxor;
+        _igc = XCreateGC(display(), Root,
+                GCFunction|GCForeground|GCBackground,
+                &values);
+        _kf = new Kfont;
+        _kf->init(this);
+    }
     else
-      {
-          d = parent->d;
-          _gc = parent->_gc;
-          _igc = parent->_igc;
-          _kf = parent->_kf;
-          bg = parent->bg;
-          fg = parent->fg;
-          bc = parent->bc;
-          bw = border;
-          p->add_child(this);
-      }
+    {
+        d = parent->d;
+        _gc = parent->_gc;
+        _igc = parent->_igc;
+        _kf = parent->_kf;
+        bg = parent->bg;
+        fg = parent->fg;
+        bc = parent->bc;
+        bw = border;
+        p->add_child(this);
+    }
     mask = m;
     mapping = map;
     pop = popupflag;
@@ -365,74 +367,74 @@ basic::basic(container* parent, long m, char *display_name,
 
 void basic::create()
 {
-  XSetWindowAttributes wa;
-  wa.background_pixel = bg;
-  wa.border_pixel = bc;
-  wa.event_mask = mask;
-  w = XCreateWindow(d, p ? p->w : Root, _x, _y, width(), height(),
-                    bw, Depth, InputOutput, CopyFromParent,
-                    CWBackPixel|CWBorderPixel|CWEventMask, &wa);
-  if (mapping)
-    map();
+    XSetWindowAttributes wa;
+    wa.background_pixel = bg;
+    wa.border_pixel = bc;
+    wa.event_mask = mask;
+    w = XCreateWindow(d, p ? p->w : Root, _x, _y, width(), height(),
+            bw, Depth, InputOutput, CopyFromParent,
+            CWBackPixel|CWBorderPixel|CWEventMask, &wa);
+    if (mapping)
+        map();
 }
 
 void basic::add_event(int type, handler func, void* arg)
 {
-  handler_info *h = new handler_info;
-  h->type = type;
-  h->func = func;
-  h->arg = arg;
-  h->next = handlers;
-  handlers = h;
+    handler_info *h = new handler_info;
+    h->type = type;
+    h->func = func;
+    h->arg = arg;
+    h->next = handlers;
+    handlers = h;
 }
 
 Bool basic::handle(XEvent* event)
 {
-  if (event->xany.window == window())
+    if (event->xany.window == window())
     {
-      for (handler_info *i = handlers; i != 0; i = i->next)
-	if (i->type == event->type)
-	  (*(i->func))(event, i->arg);
-      return True;
+        for (handler_info *i = handlers; i != 0; i = i->next)
+            if (i->type == event->type)
+                (*(i->func))(event, i->arg);
+        return True;
     }
-  return False;
+    return False;
 }
 
 void basic::put_bitmap(char* bits, int x, int y, int w, int h,
-		       Bool rev)
+        Bool rev)
 {
-  XImage ximage;
-  ximage.height = h;
-  ximage.width = w;
-  ximage.depth = 1;
-  ximage.xoffset = 0;
-  ximage.format = XYBitmap;
-  ximage.data = bits;
-  ximage.byte_order = LSBFirst;
-  ximage.bitmap_unit = 8;
-  ximage.bitmap_bit_order = LSBFirst;
-  ximage.bitmap_pad = 8;
-  ximage.bytes_per_line = (w+7)/8;
-  XPutImage(display(), window(), rev ? igc() : gc(), &ximage, 0, 0,
-	    x, y, w, h);
+    XImage ximage;
+    ximage.height = h;
+    ximage.width = w;
+    ximage.depth = 1;
+    ximage.xoffset = 0;
+    ximage.format = XYBitmap;
+    ximage.data = bits;
+    ximage.byte_order = LSBFirst;
+    ximage.bitmap_unit = 8;
+    ximage.bitmap_bit_order = LSBFirst;
+    ximage.bitmap_pad = 8;
+    ximage.bytes_per_line = (w+7)/8;
+    XPutImage(display(), window(), rev ? igc() : gc(), &ximage, 0, 0,
+            x, y, w, h);
 }
 
 void basic::run()
 {
-  XEvent event;
-  for (;;)
+    XEvent event;
+    for (;;)
     {
-      XNextEvent(d, &event);
-      switch (event.type)
-	{
-	case ButtonPress:
-	  button_press_time1 = button_press_time2;
-	  button_press_time2 = event.xbutton.time;
-	  break;
-	case ButtonRelease:
-	  if (event.xbutton.time < button_press_time1 + 500)
-	    event.type = DoubleClick;
-	}
-      handle(&event);
+        XNextEvent(d, &event);
+        switch (event.type)
+        {
+            case ButtonPress:
+                button_press_time1 = button_press_time2;
+                button_press_time2 = event.xbutton.time;
+                break;
+            case ButtonRelease:
+                if (event.xbutton.time < button_press_time1 + 500)
+                    event.type = DoubleClick;
+        }
+        handle(&event);
     }
 }
